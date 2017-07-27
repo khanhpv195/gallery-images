@@ -1,17 +1,29 @@
-@extends('./layouts.app')
-
+@extends('./dashboard')
 @section('content')
-<div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+        <table class="table table-hover">
+        	<thead>
+        		<tr>
+        			<th>File name</th>
+        			<th>Url</th>
+        			<th>Thumbnail</th>
+        			<th>Created at</th>
+        			<th>Action</th>
+        		</tr>
+        	</thead>
+        	<tbody>
 
-                <div class="panel-body">
-                    You are logged in!
-                </div>
-            </div>
-        </div>
+                   @foreach($uploads as $upload)
+                       <tr>
+                           <td> {{ $upload->image_name }} </td>
+                           <td> {{ $upload->url }} </td>
+                           <td> <img src=" {!!  $upload->url !!} " width="150"> </td>
+                           <td> {{ $upload->created_at }} </td>
+                           <td> <a href=""><i class="fa fa-edit"></i></a></td>
+                       </tr>
+                   @endforeach
+        	</tbody>
+        </table>
     </div>
-</div>
+
 @endsection

@@ -10,13 +10,16 @@
     <meta name="author" content="">
     <title>@yield('title')</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="{{asset('css/metisMenu.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/sb-admin-2.css')}}" rel="stylesheet">
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
     <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    @yield('header')
 
 </head>
 
@@ -44,14 +47,14 @@
                     <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                     </li>
                     <li class="divider"></li>
-                     <li> <a href="{{ route('logout') }}" 
-                     onclick="event.preventDefault(); 
+                    <li><a href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
                      document.getElementById('logout-form').submit();">
-                    <i class="fa fa-sign-out fa-fw"></i> Logout                                            </a>
+                            <i class="fa fa-sign-out fa-fw"></i> Logout </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             {{ csrf_field() }}
                         </form>
-                     </li>
+                    </li>
                 </ul>
             </li>
         </ul>
@@ -60,33 +63,32 @@
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
                     <li>
-                        <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        <a href="{{ route('home') }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard </a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-picture-o"></i> Images<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#"><i class="fa fa-upload"></i> Upload</a>
-                            </li>
-                        </ul>
+                        <a href="{{ route('uploads.index') }}"><i class="fa fa-picture-o"></i> Images </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('uploads.create') }}"><i class="fa fa-upload"></i> Upload </a>
                     </li>
 
                 </ul>
             </div>
         </div>
     </nav>
-    
+
 
     <div id="page-wrapper">
-        <div class="container-fuil container-top">
-          @yield('content')
+        <div class="container-fluid container-top">
+            @yield('content')
         </div>
-    </div>
+        <!-- /.container-fluid -->
 
+    </div>
+    <!-- /#page-wrapper -->
 
 </div>
-<script src="https://code.jquery.com/jquery-3.2.1.js"integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
-        crossorigin="anonymous"></script>
+<!-- /#wrapper -->
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
