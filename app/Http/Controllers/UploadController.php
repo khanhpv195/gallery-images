@@ -7,7 +7,7 @@ use App\Repositories\UploadRepository;
 
 class UploadController extends Controller
 {
-    
+
     private $uploadRepository;
 
     public function __construct(UploadRepository $uploadRepository)
@@ -18,11 +18,11 @@ class UploadController extends Controller
 
     public function index()
     {
-       $result = $this->uploadRepository->all();
-       if ($result){
-           return view('admin.index')->with('uploads',$result);
-       }
-       return false;
+        $result = $this->uploadRepository->all();
+        if ($result) {
+            return view('admin.index')->with('uploads', $result);
+        }
+        return false;
     }
 
     public function create(Request $request)
@@ -34,9 +34,9 @@ class UploadController extends Controller
     {
         $image = $request->file('file');
         $result = $this->uploadRepository->upload($image);
-        if ($result){
-            $image->move(public_path('upload'),$image->getClientOriginalName());
-            return "Upload success";
+        if ($result) {
+            $image->move(public_path('images'), $image->getClientOriginalName());
+            return redirect('uploads');
         }
         return "Upload fail";
     }

@@ -5,7 +5,6 @@
         	<thead>
         		<tr>
         			<th>File name</th>
-        			<th>Url</th>
         			<th>Thumbnail</th>
         			<th>Created at</th>
         			<th>Action</th>
@@ -16,7 +15,6 @@
                    @foreach($uploads as $upload)
                        <tr>
                            <td> {{ $upload->image_name }} </td>
-                           <td> {{ $upload->url }} </td>
                            <td> <img src=" {!!  $upload->url !!} " width="150"> </td>
                            <td> {{ $upload->created_at }} </td>
                            <td> <a href=""><i class="fa fa-edit"></i></a></td>

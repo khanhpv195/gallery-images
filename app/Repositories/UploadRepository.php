@@ -27,7 +27,7 @@ class UploadRepository
             $user = Auth::user();
             $upload = [
                 'image_name' => $image->getClientOriginalName(),
-                'url' => './upload/' . $image->getClientOriginalName(),
+                'url' => './images/' . $image->getClientOriginalName(),
                 'user_id' => $user['id']
             ];
            $data = new Upload();
