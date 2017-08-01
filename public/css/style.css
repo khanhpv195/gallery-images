@@ -1,0 +1,31 @@
+
+.panel-green {
+	margin-top: 1em;
+}
+
+.container-top
+{
+	padding-top: 1em;
+}
+.btn-file {
+	position: relative;
+	overflow: hidden;
+}
+.btn-file input[type=file] {
+	position: absolute;
+	top: 0;
+	right: 0;
+	min-width: 50%;
+	min-height: 50%;
+	text-align: right;
+	filter: alpha(opacity=0);
+	opacity: 0;
+	outline: none;
+	background: white;
+	cursor: inherit;
+	display: block;
+}
+
+#img-upload{
+	width: 50%;
+}

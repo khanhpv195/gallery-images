@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use App\Contracts\DBTable;
 
-class CreateUsersTable extends Migration
+class CreateUploads extends Migration
 {
     /**
      * Run the migrations.
@@ -14,17 +14,23 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create( 
-            DBTable::USER,
+         Schema::create( 
+            DBTable::UPLOADS, 
             function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
+            $table->string('image_name');
+            $table->string('url');
             $table->softDeletes();
-            $table->rememberToken();
             $table->timestamps();
         });
+
+        Schema::table(
+            DBTable::UPLOADS, 
+            function (Blueprint $table) {
+               $table->integer('user_id')->unsigned();
+               $table->foreign('user_id','fk__users__uploads')->references('id')->on('users');
+            }
+        );
     }
 
     /**
@@ -34,6 +40,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(DBTable::USER);
+         Schema::dropIfExists(DBTable::UPLOADS);
     }
 }
