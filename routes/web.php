@@ -21,5 +21,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/uploads', 'UploadController');
 
-//test
 Route::post('uploads/store', ['as'=>'uploads.store','uses'=>'UploadController@upload']);
+Route::delete('/uploads/destroy','UploadController@destroy')->name('uploads.destroy');

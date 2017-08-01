@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Repositories\UploadRepository;
+use App\Http\Requests\UploadRequest;
 
 class UploadController extends Controller
 {
@@ -35,23 +36,41 @@ class UploadController extends Controller
         $image = $request->file('file');
         $result = $this->uploadRepository->upload($image);
         if ($result) {
-            $image->move(public_path('images'), $image->getClientOriginalName());
+            $image->move('./images', $image->getClientOriginalName());
             return redirect('uploads');
         }
-        return "Upload fail";
+        return false;
     }
 
-    public function show()
+    public function edit($id)
     {
-
+        $result = $this->uploadRepository->edit($id);
+        if (empty($result)) {
+            abort(404);
+        }
+        return view('admin.edit')->with('uploads', $result);
     }
 
-    public function edit()
+    public function update(Request $request, $id)
     {
-
+        $image = $request->file('file');
+        $result = $this->uploadRepository->update($image, $id);
+        if ($result) {
+            $image->move('./images', $image->getClientOriginalName());
+            return redirect('uploads');
+        }
+        return false;
     }
 
-    public function update()
+    public function destroy(Request $request)
     {
+      $selectedIds = $request->input('selectedIds');
+        $selectedIds = explode(',', $selectedIds);
+        $numDeleted = $this->uploadRepository->destroy($selectedIds);
+        if ($numDeleted > 0) {
+            return redirect('/uploads');
+        }
+        return false;
     }
+
 }

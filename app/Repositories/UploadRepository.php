@@ -20,7 +20,7 @@ class UploadRepository
 
     static public function upload($image = [])
     {
-        if (empty($image)){
+        if (empty($image)) {
             return false;
         }
         try {
@@ -30,15 +30,65 @@ class UploadRepository
                 'url' => './images/' . $image->getClientOriginalName(),
                 'user_id' => $user['id']
             ];
-           $data = new Upload();
-           $data->fill($upload);
-           $createFile = $data->saveOrFail();
-           return $createFile;
+            $data = new Upload();
+            $data->fill($upload);
+            $createFile = $data->saveOrFail();
+            return $createFile;
         } catch (\Exception $e) {
             Log::error('Exception: ' . $e->getMessage());
             return false;
         }
 
+    }
+
+    static public function edit($id)
+    {
+        if (empty($id)) {
+            return false;
+        }
+        try {
+            $upload = Upload::find($id);
+            return $upload;
+        } catch (\Exception $e) {
+            Log::error('Exception: ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    static public function update($image = [], $id)
+    {
+        if (empty($image)) {
+            return false;
+        }
+
+        try {
+            $upload = [
+                'image_name' => $image->getClientOriginalName(),
+                'url' => './images/' . $image->getClientOriginalName(),
+            ];
+            $data = Upload::find($id);
+            $data->fill($upload);
+            $updateFile = $data->saveOrFail();
+            return $updateFile;
+        } catch (\Exception $e) {
+            Log::error('Exception: ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    static  public  function destroy($selectedIds)
+    {
+        if (empty($selectedIds)) {
+            return false;
+        };
+
+        try {
+            $data = Upload::destroy($selectedIds);
+            return $data;
+        } catch (\Exception $e) {
+           Log::error('Exception: ' . $e->getMessage());
+            return false; 
+        }
     }
 }
 

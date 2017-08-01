@@ -19,6 +19,10 @@
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+    <script src="{{asset('js/checkallbuton.js')}}"> </script>
+    <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
     @yield('header')
 
 </head>
