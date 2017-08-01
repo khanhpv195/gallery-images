@@ -18,4 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/uploads','HomeController@upload')->name('upload');
+
+Route::resource('/uploads', 'UploadController');
+
+Route::post('uploads/store', ['as'=>'uploads.store','uses'=>'UploadController@upload']);
+Route::delete('/uploads/destroy','UploadController@destroy')->name('uploads.destroy');

@@ -1,27 +1,58 @@
 @extends('./dashboard')
-
+@section('title')
+    Upload file images
+@endsection
 @section('content')
+    <div class="row">
+    <div class="col-md-6">
+        <form method="POST" action="{{ route('uploads.store') }}" enctype="multipart/form-data" id="image-upload"> {{ csrf_field() }}
+            <div class="form-group">
+                <div class="input-group"> <span class="input-group-btn">
+                <span class="btn btn-default btn-file">
+                    Browse… <input type="file" id="file"  name="file" multiple>
+                </span> </span>
+                    <input type="text" class="form-control" id="field" name="field"> </div> <img id='img-upload' class="img-rounded" /> </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+    </div>
+</div>
+    <script>
+      
+        $(document).ready( function() {
+            $(document).on('change', '.btn-file :file', function() {
+                var input = $(this),
+                    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                input.trigger('fileselect', [label]);
+            });
 
-		<label class="control-label">Planets and Satellites</label>
-		<input id="input-24" name="input24[]" type="file" multiple class="form-control">
-		<script>
-		$(document).on('ready', function() {
-		    $("#input-24").fileinput({
-		        initialPreview: [
-		            'http://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/631px-FullMoon2010.jpg',
-		            'http://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Earth_Eastern_Hemisphere.jpg/600px-Earth_Eastern_Hemisphere.jpg'
-		        ],
-		        initialPreviewAsData: true,
-		        initialPreviewConfig: [
-		            {caption: "Moon.jpg", size: 930321, width: "120px", key: 1},
-		            {caption: "Earth.jpg", size: 1218822, width: "120px", key: 2}
-		        ],
-		        deleteUrl: "/site/file-delete",
-		        overwriteInitial: false,
-		        maxFileSize: 100,
-		        initialCaption: "The Moon and the Earth"
-		    });
-		});
-		</script>
+            $('.btn-file :file').on('fileselect', function(event, label) {
 
+                var input = $(this).parents('.input-group').find(':text'),
+                    log = label;
+
+                if( input.length ) {
+                    input.val(log);
+                } else {
+                    if( log ) alert(log);
+                }
+
+            });
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#img-upload').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $("#file").change(function(){
+                readURL(this);
+            });
+
+        });
+    </script>
 @endsection
